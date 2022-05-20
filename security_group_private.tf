@@ -12,6 +12,18 @@ resource "aws_security_group" "private" {
     from_port = 3000
     to_port = 3000
     protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+    ingress {
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    cidr_blocks = [module.network.vpc_cidr] 
+  }
+    ingress {
+    from_port = 6379
+    to_port = 6379
+    protocol = "tcp"
     cidr_blocks = [module.network.vpc_cidr] 
   }
 
